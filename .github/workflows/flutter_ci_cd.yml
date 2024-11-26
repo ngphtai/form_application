@@ -1,0 +1,49 @@
+
+name: Flutter CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    # 1. Checkout code từ repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2. Setup Flutter (bằng thư viện từ Marketplace)
+    - name: Setup Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.24.3' # Hoặc '3.10.0' (version cụ thể)
+
+    # 3. Install dependencies
+    - name: Install dependencies
+      run: flutter pub get
+
+    # 4. Run code analysis
+    - name: Analyze code
+      run: flutter analyze
+     
+      
+    # 5. Run tests
+   # - name: Run tests
+   #   run: flutter test
+
+    # 6. Build APK
+    - name: Build APK
+      run: flutter build apk --release --scan
+
+    # 7. Optional: Upload APK as artifact
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-release.apk
+        path: build/app/outputs/flutter-apk/app-release.apk
