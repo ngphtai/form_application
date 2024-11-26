@@ -33,7 +33,7 @@ jobs:
       run: flutter analyze
 
     - name: Build APK
-      run: flutter build apk --release --scan
+      run: flutter build apk --release
 
     - name: Upload APK artifact
       uses: actions/upload-artifact@v3
