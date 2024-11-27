@@ -55,13 +55,11 @@ jobs:
         draft: false
         prerelease: false
 
-    - name: Upload APK to Release
-      uses: actions/upload-release-asset@v1
+    - name: Push APK to Releases
+      uses: ncipollo/release-action@v1
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: app-release.apk
-        asset_name: app-release.apk
-        asset_content_type: application/vnd.android.package-archive
+        artifacts: "build/app/outputs/apk/debug/*.apk"
+        token: ${{ secrets.TOKEN }}
 
     - name: Download Artifact
       uses: actions/download-artifact@v3
