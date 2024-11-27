@@ -49,9 +49,9 @@ jobs:
       id: create_release
       uses: actions/create-release@v1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Sử dụng token mặc định hoặc thay `GITHUB_TOKEN` bằng `TOKEN`
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: 'release-${{ github.run_number }}'
+        tag_name: 'release-${{ github.run_number }}-${{ github.sha }}'
         release_name: 'Release ${{ github.run_number }}'
         body: |
           This release includes the latest APK for the application.
