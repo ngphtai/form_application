@@ -54,6 +54,7 @@ jobs:
           This release includes the latest APK for the application.
         draft: false
         prerelease: false
+       
 
     - name: Upload APK to Release
       uses: actions/upload-release-asset@v1
