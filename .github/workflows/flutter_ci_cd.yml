@@ -56,23 +56,11 @@ jobs:
         prerelease: false
 
     - name: Push APK to Releases
-      uses: ncipollo/release-action@v1
+      uses: actions/release-action@v1
       with:
         artifacts: "build/app/outputs/apk/debug/*.apk"
+        asset_path: app-release.apk
+        asset_name: app-release.apk
         token: ${{ secrets.TOKEN }}
 
-    - name: Download Artifact
-      uses: actions/download-artifact@v3
-      with:
-        name: FrEee.WinForms-${{ steps.createReleaseTag.outputs.string }}
-        path: FrEee.WinForms-${{ steps.createReleaseTag.outputs.string }}
-
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        upload_url: "${{ steps.createRelease.outputs.upload_url }}"
-        asset_path: FrEee.WinForms-${{ steps.createReleaseTag.outputs.string }}
-        asset_name: FrEee.WinForms-${{ steps.createReleaseTag.outputs.string }}
-        asset_content_type: application/zip
+  
