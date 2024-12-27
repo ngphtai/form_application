@@ -39,11 +39,7 @@ jobs:
     - name: Install dependencies
       run: flutter pub get
 
-    - name: Build APK
-      run: flutter build apk --release
 
-    - name: Archive APK
-      run: mv build/app/outputs/flutter-apk/app-release.apk app-release.apk
 
     - name: Create GitHub Release
       id: create_release
@@ -84,7 +80,7 @@ jobs:
       
     - name: Initialize Fastlane
       working-directory: android
-      run: fastlane init --no-ios
+      run: fastlane init
       
     - name: Install Firebase distribution plugin for Fastlane
       run: fastlane add_plugin firebase_app_distribution
