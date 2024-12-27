@@ -30,43 +30,32 @@ jobs:
       with:
         flutter-version: '3.24.3'
 
-    - name: Ensure assets directory exists
-      run: mkdir -p assets
-
-    - name: Create credentials.json
-      run: echo "${{ secrets.CREDENTIALS_JSON }}" > assets/credentials.json
-
     - name: Install dependencies
       run: flutter pub get
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
-          ruby-version: '3.2'
-    - name: Install Bundler
-      run: sudo gem install bundler
-      
-    - name: Install fastlane
-      run: sudo gem install fastlane
-      
+        ruby-version: '3.2'
+
+    - name: Setup Bundler
+      run: |
+        bundle init
+        echo "gem 'fastlane'" >> Gemfile
+        echo "gem 'fastlane-plugin-firebase_app_distribution'" >> Gemfile
+        bundle install --path vendor/bundle
+
     - name: Initialize Fastlane
       working-directory: android
-      run: fastlane init
-      
-    - name: Install Firebase distribution plugin for Fastlane
-      run: fastlane add_plugin firebase_app_distribution
-    
-   
-       
-    - name: create Fastfile 
+      run: bundle exec fastlane init --no-ios
+
+    - name: Install Firebase plugin for Fastlane
+      run: bundle exec fastlane add_plugin firebase_app_distribution
+
+    - name: Create Fastfile
       working-directory: android
-      run: echo "${{ secrets.FASTFILE }}" > android/Fastfile
-      
-    - name: Fastlane upload firebase distribute
+      run: echo "${{ secrets.FASTFILE }}" > fastlane/Fastfile
+
+    - name: Upload to Firebase
       working-directory: android
       run: bundle exec fastlane firebase_distribute
-
-
-
-
-    
