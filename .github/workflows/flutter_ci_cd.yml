@@ -78,12 +78,25 @@ jobs:
           ruby-version: '3.2'
     - name: Install Bundler
       run: sudo gem install bundler
+      
     - name: Install fastlane
       run: sudo gem install fastlane
-    - name: Install Firebase plugin for Fastlane
+    
+    - name: Install Firebase distribution plugin for Fastlane
       run: fastlane add_plugin firebase_app_distribution
+    
+    - name: Initialize Fastlane
+      working-directory: android
+      run: fastlane init --no-ios
+       
     - name: create Fastfile 
+      working-directory: android
       run: echo "${{ secrets.FASTFILE }}" > android/Fastfile
+      
     - name: Fastlane upload firebase distribute
       run: bundle exec fastlane firebase_distribute
+
+
+
+
     
