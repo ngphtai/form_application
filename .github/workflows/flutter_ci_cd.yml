@@ -72,12 +72,16 @@ jobs:
         asset_path: app-release.apk
         asset_name: app-release.apk
         asset_content_type: application/apk
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+          ruby-version: '3.2'
     - name: Install Bundler
       run: sudo gem install bundler
     - name: Install fastlane
       run: sudo gem install fastlane
     - name: Install Firebase plugin for Fastlane
-      run: bundle exec fastlane add_plugin firebase_app_distribution
+      run: fastlane add_plugin firebase_app_distribution
     - name: create Fastfile 
       run: echo "${{ secrets.FASTFILE }}" > android/Fastfile
     - name: Fastlane upload firebase distribute
