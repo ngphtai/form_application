@@ -35,7 +35,10 @@ jobs:
     - name: Install fastlane
       run: sudo gem install fastlane
     
-    
+    - name: Fastlane upload firebase distribute
+      working-directory: android
+      run: bundle exec fastlane firebase_distribute
+      
     - name: Create Fastfile
       working-directory: android
       run: echo "${{ secrets.FASTFILE }}" > fastlane/Fastfile
