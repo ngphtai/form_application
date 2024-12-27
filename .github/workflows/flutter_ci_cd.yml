@@ -94,6 +94,7 @@ jobs:
       run: echo "${{ secrets.FASTFILE }}" > android/Fastfile
       
     - name: Fastlane upload firebase distribute
+      working-directory: android
       run: bundle exec fastlane firebase_distribute
 
 
