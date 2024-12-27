@@ -74,7 +74,8 @@ jobs:
         asset_content_type: application/apk
     - name: Install Bundler
       run: sudo gem install bundler
-
+    - name: Install fastlane
+      run: sudo gem install fastlane
     - name: Install Firebase plugin for Fastlane
       run: bundle exec fastlane add_plugin firebase_app_distribution
     - name: create Fastfile 
