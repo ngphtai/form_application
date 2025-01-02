@@ -24,7 +24,7 @@ platform :android do
   desc "Distribute Android build to Firebase"
   lane :firebase_distribute do
     # Build app bundle or APK
-    gradle(task: "assembleRelease")
+    gradle(task: "assembleRelease", flags: "--debug")
 
     # Firebase App Distribution
     firebase_app_distribution(
