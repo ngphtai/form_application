@@ -108,7 +108,10 @@ jobs:
     #     asset_path: app-release.apk
     #     asset_name: app-release.apk
     #     asset_content_type: application/apk
-
+    - name: Debug Secrets
+      run: echo "FIREBASE_APP_ID=$FIREBASE_APP_ID"
+      env:
+        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
     
     - name: Fastlane upload firebase distribute
       env:
