@@ -37,12 +37,20 @@ jobs:
         echo "gem 'fastlane'" >> Gemfile
         echo "gem 'fastlane-plugin-firebase_app_distribution'" >> Gemfile
         bundle install --path vendor/bundle
-    
+        
+    - name: Setup Fastlane
+      working-directory: android
+      run: |
+        mkdir -p fastlane
+        echo "${{ secrets.FASTFILE }}" > fastlane/Fastfile
+        
     - name: Install fastlane
       run: sudo gem install fastlane
+      
     - name: Install Bundler dependencies
       run: |
         bundle install --path vendor/bundle
+        
     - name: Add Firebase App Distribution Plugin
       run: |
         bundle exec fastlane add_plugin firebase_app_distribution
@@ -51,10 +59,6 @@ jobs:
       working-directory: android
       run: bundle exec fastlane firebase_distribute
       
-    - name: Create Fastfile
-      working-directory: android
-      run: echo "${{ secrets.FASTFILE }}" > fastlane/Fastfile
-
     - name: Upload to Firebase
       working-directory: android
       run: bundle exec fastlane firebase_distribute
