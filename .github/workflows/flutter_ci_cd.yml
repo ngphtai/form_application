@@ -64,10 +64,10 @@ jobs:
       run: |
         bundle install --path vendor/bundle
         
-    - name: Add Firebase App Distribution Plugin
-      working-directory: android
-      run: |
-        bundle exec fastlane add_plugin firebase_app_distribution
+    # - name: Add Firebase App Distribution Plugin
+    #   working-directory: android
+    #   run: |
+    #     bundle exec fastlane add_plugin firebase_app_distribution
         
     - name: Ensure assets directory exists
       run: mkdir -p assets
