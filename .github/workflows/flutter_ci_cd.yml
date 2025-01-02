@@ -111,6 +111,9 @@ jobs:
 
     
     - name: Fastlane upload firebase distribute
+      env:
+        FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
+        FIREBASE_CLI_TOKEN: ${{ secrets.FIREBASE_CLI_TOKEN }}
       working-directory: android
       run: bundle exec fastlane firebase_distribute
       
