@@ -30,7 +30,7 @@ jobs:
     #       ssh-private-key: ${{ secrets.SSH_TOKEN}}
     - name: bundle install
       run: bundle install
-       working-directory: android
+      working-directory: android
     - name: Setup Bundler
       run: |
         bundle init
